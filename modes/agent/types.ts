@@ -26,3 +26,46 @@ export interface ActionLog {
     userApproved:boolean;
 }
 
+export interface AgentConfig {
+    codeBasePath:string;
+    maxFileSizeToRead:number;
+    excludedPatterns:string[];
+    tools: {
+        allowShellExecution:boolean;
+        allowFileCreation:boolean;
+        allowFileModification:boolean;
+        allowFolderCreation:boolean;
+    };
+}
+
+export const defaultAgentConfig = (): AgentConfig => ({
+    codeBasePath:process.cwd(),
+    maxFileSizeToRead:1024 * 1024,
+    excludedPatterns: [
+        "node_module",
+        ".git",
+        ".node",
+        ".env*",
+        "build",
+        "dist",
+        ".next"
+    ],
+    tools : {
+        allowShellExecution: true,
+        allowFileCreation: true,
+        allowFileModification: true,
+        allowFolderCreation: true
+    }
+})
+
+export function isMutationType(t : ActionType): boolean {
+    return (
+        t === "fileCreate"||
+        t === "fileModify"||
+        t === "fileDelete"||
+        t === "folderCreate"||
+        t === "codeAnalysis"||
+        t === "toolExecute"
+    );
+}
+

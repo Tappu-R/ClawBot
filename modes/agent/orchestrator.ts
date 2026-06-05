@@ -1,6 +1,7 @@
 import chalk from "chalk"
 import {text} from "@clack/prompts"
 import {isCancel} from "@clack/prompts"
+import { defaultAgentConfig } from "./types.ts"
 
 export async function runAgentMode() {
     const goal = await text({
@@ -10,4 +11,5 @@ export async function runAgentMode() {
     if (!goal) return;
     
     const config = defaultAgentConfig()
-}
+    console.log("ehlo you are there")
+} 
