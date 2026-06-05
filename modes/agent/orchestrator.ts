@@ -1,7 +1,8 @@
 import chalk from "chalk"
 import {text} from "@clack/prompts"
 import {isCancel} from "@clack/prompts"
-import { defaultAgentConfig } from "./types.ts"
+import { defaultAgentConfig } from "./types"
+import { ActionTracker} from "./action_tracker"
 
 export async function runAgentMode() {
     const goal = await text({
@@ -11,5 +12,8 @@ export async function runAgentMode() {
     if (!goal) return;
     
     const config = defaultAgentConfig()
-    console.log("ehlo you are there")
+    const tracker = new ActionTracker();
+    const toolExecuter = new ToolExecuter(tracker, config);
+
+
 } 

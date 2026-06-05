@@ -21,7 +21,6 @@ export interface ActionLog {
         error?:String;
         command?:String;
     };
-
     status:ActionStatus;
     userApproved:boolean;
 }
@@ -68,4 +67,3 @@ export function isMutationType(t : ActionType): boolean {
         t === "toolExecute"
     );
 }
-
